@@ -1,0 +1,61 @@
+<div class="container">
+    <div class="row">
+        <h1 class="col-sm">Galería de imágenes</h1>
+        <form class="col-sm">
+            <!-- <div class="form-group row">
+                <div class="col-sm-5">
+                    <input type="number" class="form-control" id="idForm" aria-describedby="search by id"
+                        placeholder="Buscar por id">
+                </div>
+                <div class="col-sm-5">
+                        <input type="text" class="form-control" id="textForm" aria-describedby="search by id"
+                            placeholder="Buscar por texto">
+                    </div>
+                <div class="col-sm-2">
+                    <button type="submit" class="btn btn-primary">Submit</button>
+                </div>
+            </div> -->
+            <div class="input-group">
+                <input type="number" class="form-control" id="idForm" name="idForm" aria-describedby="search by id"
+                    placeholder="Buscar por id"  [(ngModel)]="idForm" >
+                <input type="text" class="form-control" id="textForm" name="textForm" aria-describedby="search by id"
+                    placeholder="Buscar por texto"  [(ngModel)]="textForm">
+                <div class="input-group-append">
+                    <button class="btn btn-outline-secondary" type="button" (click)="search()">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-search" viewBox="0 0 16 16">
+                                <path d="M11.742 10.344a6.5 6.5 0 1 0-1.397 1.398h-.001c.03.04.062.078.098.115l3.85 3.85a1 1 0 0 0 1.415-1.414l-3.85-3.85a1.007 1.007 0 0 0-.115-.1zM12 6.5a5.5 5.5 0 1 1-11 0 5.5 5.5 0 0 1 11 0z"/>
+                              </svg>
+                    </button>
+                </div>
+            </div>
+        </form>
+
+    </div>
+</div>
+<div class="container limit-size-scroll">
+    <ng-container *ngFor="let item of randomArrayDisplayed;let indexi = index">
+        <div class="row margin border-bottom" *ngIf="indexi % 3 == 0">
+            <ng-container *ngFor="let j of [].constructor(3); let indexj = index">
+                <ng-template [ngTemplateOutlet]="displayItemArray"
+                    [ngTemplateOutletContext]="{item: randomArrayDisplayed[indexi + indexj]}"
+                    *ngIf="indexi + indexj < randomArrayDisplayed.length"></ng-template>
+            </ng-container>
+        </div>
+    </ng-container>
+</div>
+
+
+<ng-template #displayItemArray let-item='item'>
+    <div class="col-sm">
+        <div class="row">
+            <div class="col-sm">
+                {{ item.text }}
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-sm">
+                <img src="{{ item.photo}}">
+            </div>
+        </div>
+    </div>
+</ng-template>
